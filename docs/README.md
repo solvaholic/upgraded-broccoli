@@ -1,27 +1,20 @@
-# template
-@solvaholic's repository template
+# upgraded-broccoli
+@solvaholic is learning to use Go
 
-## What to do next
+## Black Hat Go, from nostarch.com
 
-"So I created this repository from the template. Now what?"
+> It's like C, but...
 
-1. Decide whether to use the included workflows (described below).
-1. Configure repository settings, for example branch protection.
-1. Confirm whether the included license and documentation are appropriate for this repository.
-1. Replace this readme, which is in the `docs` directory.
+If you're tired of :point_up: that phrase, then check out [Black Hat Go](https://nostarch.com/blackhatgo) from no starch press.
 
-## Included workflows
+Learn Go while you learn networking. What's not to love?!
 
-The workflows included with this template are enabled by default. View their results under this repository's _Actions_ tab.
+## ./port-scanner
+A simple port scanner.
 
-### Lint Code Base
+```bash
+go run .
+```
 
-Runs **[github/super-linter](https://github.com/github/super-linter)** on each push to this repository, and adds the resulting status to the commit.
-
-View or modify this workflow's configuration in `.github/workflows/linter.yml`.
-
-### Sync changes from template
-
-Periodically checks for changes in **[solvaholic/template](https://github.com/solvaholic/template)** and, if there are any, creates or updates a pull request in this repository to review the changes.
-
-View or modify this workflow's configuration in `.github/workflows/sync-from-template.yml`.
+1. Dial scanme.nmap.org TCP ports 1 through 100
+1. Output `NN open` of port `NN` is open
