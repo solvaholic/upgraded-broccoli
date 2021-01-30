@@ -4,46 +4,49 @@ import (
 	"fmt"
 	"net"
 	"sort"
-	"sync"
 )
 
-func worker(ports, results chan int, wg *sync.WaitGroup) {
+func worker(ports, results chan int) {
 	for p := range ports {
 		address := fmt.Sprintf("scanme.nmap.org:%d", p)
 		conn, err := net.Dial("tcp", address)
 		if err != nil {
 			results <- 0
 			// fmt.Println(p)
-			wg.Done()
 			continue
 		}
 		conn.Close()
 		results <- p
-		wg.Done()
 	}
 }
 
 func main() {
-	ports := make(chan int, 100)
+	// How many workers to run? Must be >= 1
+	const NumWorkers int = 50
+	// Define range of ports to scan
+	const MinPort int = 1
+	const MaxPort int = 100
+	// Set size of ports channel
+	const MaxChan int = 10
+
+	ports := make(chan int, MaxChan)
 	results := make(chan int)
 	var openports []int
-	var wg sync.WaitGroup
 
 	// Start a worker for each size? of ports
-	for i := 0; i < cap(ports); i++ {
-		go worker(ports, results, &wg)
+	for i := 0; i < NumWorkers; i++ {
+		go worker(ports, results)
 	}
 
 	// Add ports via go routine so can start results loop
 	go func() {
-		for i := 1; i <= 100; i++ {
-			wg.Add(1)
+		for i := MinPort; i <= MaxPort; i++ {
 			ports <- i
 		}
 	}()
 
 	// Read one result for each port added to ports
-	for i := 0; i < 100; i++ {
+	for i := MinPort; i <= MaxPort; i++ {
 		port := <-results
 		if port != 0 {
 			openports = append(openports, port)
@@ -51,7 +54,6 @@ func main() {
 	}
 
 	// Wait for all the work to finish; Clean up
-	wg.Wait()
 	close(ports)
 	close(results)
 
