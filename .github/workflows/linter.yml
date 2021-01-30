@@ -6,10 +6,8 @@ name: Lint Code Base
 #
 
 on:
-  # Run on each push, except to main
+  # Run on each push
   push:
-    branches-ignore:
-      - 'main'
 
 jobs:
   build:
