@@ -19,12 +19,12 @@ go run port-scanner/main.go
 1. Dial scanme.nmap.org TCP ports 1 through 100
 1. Output `NN open` if port `NN` is open
 
-## ./tcp-proxy
+## ./echo
 A simple echo server.
 
 1. Start the server
     ```bash
-    go run tcp-proxy/main.go
+    go run echo/main.go
     ```
 1. Send text, receive echo
     ```bash
