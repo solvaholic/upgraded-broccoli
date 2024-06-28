@@ -9,6 +9,8 @@ If you're tired of :point_up: that phrase, then check out [Black Hat Go](https:/
 
 Learn Go while you learn networking. What's not to love?!
 
+See also [Effective Go](https://go.dev/doc/effectivego) and [Go Wiki: Go Code Review Comments](https://go.dev/wiki/CodeReviewComments).
+
 ## ./port-scanner
 A simple port scanner.
 
@@ -16,17 +18,17 @@ A simple port scanner.
 go run port-scanner/main.go
 ```
 
-1. Dial scanme.nmap.org TCP ports 1 through 100
-1. Output `NN open` if port `NN` is open
+1. port-scanner dials scanme.nmap.org TCP ports 1 through 100
+1. And outputs `NN open` if port `NN` is open
 
 ## ./echo
 A simple echo server.
 
-1. Start the server
+1. Start the echo server
     ```bash
     go run echo/main.go
     ```
-1. Send text, receive echo
+1. echo listens for text, echoes it back
     ```bash
     telnet 127.0.0.1 20080
     Hello World
@@ -35,11 +37,11 @@ A simple echo server.
 ## ./gaping-hole
 An unsecure remote shell.
 
-1. Start the server
+1. Start the gaping-hole server
     ```bash
     go run gaping-hole/main.go
     ```
-1. Run commands in the remote shell
+1. gaping-hole listens for text, runs in the remote shell
     ```bash
     telnet 127.0.0.1 20080
     echo "Hello World"
